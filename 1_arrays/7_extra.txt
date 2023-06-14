@@ -1,0 +1,8 @@
+// also solve similar problems
+game of life : https://leetcode.com/problems/game-of-life/description/
+perm 1:https://leetcode.com/problems/permutations/
+perm2:https://leetcode.com/problems/permutations-ii/
+perm seq: https://leetcode.com/problems/permutation-sequence/   // a mathematcal trick in that 
+
+
+
