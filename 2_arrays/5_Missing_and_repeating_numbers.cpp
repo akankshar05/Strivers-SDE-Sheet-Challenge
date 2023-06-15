@@ -1,4 +1,6 @@
-#include <bits/stdc++.h>
+#include <vector>
+#include <set>
+using namespace std;
 
 pair<int, int> missingAndRepeating(vector<int> &arr, int n)
 {
