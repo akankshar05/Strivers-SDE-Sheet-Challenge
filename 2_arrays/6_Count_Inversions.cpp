@@ -1,17 +1,11 @@
-#include <bits/stdc++.h>
+#include <vector>
+#include <set>
+#include <iostream>
+using namespace std;
 
 long long merge(long long *nums, int low, int mid, int high)
 {
     long long cnt = 0;
-    int temp = mid + 1;
-    for (int i = low; i <= mid; i++)
-    {
-
-        while (temp <= high && nums[i] > (long)nums[temp])
-            temp++;
-        //  temp=5,
-        cnt += (temp - (mid + 1));
-    }
 
     // merging
     int n1 = mid - low + 1;
@@ -42,6 +36,7 @@ long long merge(long long *nums, int low, int mid, int high)
         else
         {
             nums[k] = arr2[j];
+            cnt += n1 - i;
             j++;
         }
         k++;
@@ -76,4 +71,17 @@ long long mergesort(long long *nums, int low, int high)
 long long getInversions(long long *arr, int n)
 {
     return mergesort(arr, 0, n - 1);
+}
+
+int main()
+{
+    const int n = 6;
+    long long arr[n] = {2, 5, 1, 1, 3, 4};
+
+    cout << getInversions(arr, n) << endl;
+
+    for (int i = 0; i < n; i++)
+    {
+        cout << arr[i] << " ";
+    }
 }
