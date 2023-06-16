@@ -1,6 +1,5 @@
-#include <vector>
-#include <set>
 #include <iostream>
+#include <vector>
 using namespace std;
 
 struct eleCount
@@ -12,18 +11,32 @@ struct eleCount
 vector<int> moreThanNdK(vector<int> &nums, int n, int k)
 {
     vector<int> result;
-    if (k < 2)
+    if (k < 1)
         return result;
 
-    struct eleCount temp[k - 1];
-    for (int i = 0; i < k - 1; i++)
+    if (k == 1)
+    {
+        for (auto i : nums)
+        {
+            auto it = find(result.begin(),
+                           result.end(), i);
+            if (it == result.end())
+            {
+                result.push_back(i);
+            }
+        }
+        return result;
+    }
+
+    struct eleCount temp[k];
+    for (int i = 0; i < k; i++)
         temp[i].c = 0;
 
     for (int i = 0; i < n; i++)
     {
         int j;
 
-        for (j = 0; j < k - 1; j++)
+        for (j = 0; j < k; j++)
         {
             if (temp[j].e == nums[i])
             {
@@ -32,11 +45,11 @@ vector<int> moreThanNdK(vector<int> &nums, int n, int k)
             }
         }
 
-        if (j == k - 1)
+        if (j == k)
         {
             int l;
 
-            for (l = 0; l < k - 1; l++)
+            for (l = 0; l < k; l++)
             {
                 if (temp[l].c == 0)
                 {
@@ -46,20 +59,20 @@ vector<int> moreThanNdK(vector<int> &nums, int n, int k)
                 }
             }
 
-            if (l == k - 1)
+            if (l == k)
                 for (l = 0; l < k; l++)
                     temp[l].c -= 1;
         }
     }
 
-    for (int i = 0; i < k - 1; i++)
+    for (int i = 0; i < k; i++)
     {
         int ac = 0; // actual count
         for (int j = 0; j < n; j++)
             if (nums[j] == temp[i].e)
                 ac++;
 
-        if (ac > n / k)
+        if (ac >= n / k)
         {
             result.push_back(temp[i].e);
         }
@@ -71,10 +84,10 @@ vector<int> moreThanNdK(vector<int> &nums, int n, int k)
 int main()
 {
 
-    vector<int> vec = {1, 1, 2, 2};
+    vector<int> vec = {1, 1, 2, 2, 3};
 
     int size = vec.size();
-    int k = 2;
+    int k = 1;
     vector<int> ans;
     ans = moreThanNdK(vec, size, k);
 
